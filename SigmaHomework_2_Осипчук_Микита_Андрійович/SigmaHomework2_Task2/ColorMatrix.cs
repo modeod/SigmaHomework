@@ -31,8 +31,8 @@ namespace SigmaHomework2_Task2
             for (int y = 0; y < _n; y++)
             {
                 ColorHorizontalLine currentLine = new ColorHorizontalLine(
-                    new Point(y, 0),
-                    new Point(y, 0),
+                    new Point(0, y),
+                    new Point(0, y),
                     _matrix[y, 0]);
 
                 for (int x = 1; x < _m; x++)

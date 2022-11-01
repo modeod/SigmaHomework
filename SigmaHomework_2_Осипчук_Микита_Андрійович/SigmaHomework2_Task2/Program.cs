@@ -16,7 +16,7 @@
                 Console.WriteLine(line);
                 Console.WriteLine(new String('-', 10));
 
-                if (line.LenghtHorizontal >= 4) break;
+                if (line.LenghtHorizontal > 4) break;
             }
         }
     }
