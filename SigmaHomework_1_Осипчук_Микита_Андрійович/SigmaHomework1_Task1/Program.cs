@@ -1,9 +1,13 @@
-﻿namespace SigmaHomework1_Task1
+﻿using System.Text;
+
+namespace SigmaHomework1_Task1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             Console.WriteLine("Hello, World!");
 
             Check check = new Check();
