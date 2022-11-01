@@ -62,18 +62,18 @@ namespace SigmaHomework2_Task2
         {
             Random rnd = new Random();
 
-            //for (int y = 0; y < _n; y++)
-            //    for (int x = 0; x < _m; x++)
-            //        _matrix[y, x] = (byte)rnd.Next(0, 17);
+            for (int y = 0; y < _n; y++)
+                for (int x = 0; x < _m; x++)
+                    _matrix[y, x] = (byte)rnd.Next(0, 17);
 
-            _matrix = new byte[,]
-            {
-                {10, 4, 0, 15, 14 },
-                { 8, 0, 6, 3, 0},
-                { 15, 11, 7, 14, 2},
-                {0, 6, 9, 13, 5},
-                {7, 10, 2, 11, 11 },
-            };
+            //_matrix = new byte[,]
+            //{
+            //    {10, 4, 0, 15, 14 },
+            //    { 8, 0, 6, 3, 0},
+            //    { 15, 11, 7, 14, 2},
+            //    {0, 6, 9, 13, 5},
+            //    {7, 10, 2, 11, 11 },
+            //};
 
             return this;
         }
@@ -86,7 +86,7 @@ namespace SigmaHomework2_Task2
             {
                 for (int x = 0; x < _m; ++x)
                 {
-                    stringBuilder.Append(_matrix[y, x] + " ");
+                    stringBuilder.Append(_matrix[y, x].ToString().PadLeft(2, ' ') + " ");
                 }
                 stringBuilder.Append("\n");
             }

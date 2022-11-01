@@ -6,11 +6,11 @@
         {
             Console.WriteLine("Hello, World!");
 
-            MMMatrix verticalMatrix = new VerticalSnakeMatrix(5, 3);
+            MMMatrix verticalMatrix = new VerticalSnakeMatrix(7, 3);
             Console.WriteLine(verticalMatrix.Fill(false).ToString());
             Console.WriteLine(verticalMatrix.Fill(true).ToString()); // revert
 
-            MMMatrix spiralMatrix = new SpiralMatrix(5, 3);
+            MMMatrix spiralMatrix = new SpiralMatrix(6, 8);
             Console.WriteLine(spiralMatrix.Fill(false).ToString());
             Console.WriteLine(spiralMatrix.Fill(true).ToString()); // revert
 
