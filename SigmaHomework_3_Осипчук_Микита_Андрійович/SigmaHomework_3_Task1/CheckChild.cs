@@ -8,6 +8,6 @@ namespace SigmaHomework_3_Task1
 {
     public class CheckChild : Check
     {
-        // Cart Print in 5th homework
+        // Cart Print in 5th homework 
     }
 }
