@@ -30,10 +30,16 @@ namespace SigmaHomework_3_Task1
 
         public void AddProductsToStorageWithConsole()
         {
+            string? assemblyName = Assembly.GetAssembly(this.GetType())?.GetName().Name;
+            if (assemblyName == null)
+                throw new NullReferenceException($"Assembly was not found");
+
+            string typePath = $"{assemblyName}.ProductsModels.ProductModel";
+
             Console.WriteLine("Сhoose Class type:");
-            Type? productType = Type.GetType("SigmaHomework_3_Task1.ProductsModels.ProductModel");
+            Type? productType = Type.GetType(typePath);
             if (productType == null)
-                throw new NullReferenceException("Product type was not found in 'SigmaHomework_3_Task1.ProductsModels' directory");
+                throw new NullReferenceException($"Product type was not found in '{assemblyName}.ProductsModels' directory");
 
             List<Type>? listOfProductSubclassesTypes = Assembly
                 .GetAssembly(productType)?
@@ -41,7 +47,7 @@ namespace SigmaHomework_3_Task1
                 .Where(type => type.IsSubclassOf(productType))
                 .ToList();
             if (listOfProductSubclassesTypes == null)
-                throw new NullReferenceException("Assembly was not using 'SigmaHomework_3_Task1.ProductsModels.ProductModel' directory");
+                throw new NullReferenceException($"Assembly was not using '{assemblyName}.ProductsModels.ProductModel' directory");
 
             listOfProductSubclassesTypes.Add(productType);
 
@@ -50,7 +56,7 @@ namespace SigmaHomework_3_Task1
                 "Enter number of product type: ");
 
             string typeAnswer = listOfProductSubclassesTypes[answer].Name;
-            Type? factoryType = Type.GetType($"SigmaHomework_3_Task1.ProductFactories.{typeAnswer[..^5]}Factory");
+            Type? factoryType = Type.GetType($"{assemblyName}.ProductFactories.{typeAnswer[..^5]}Factory");
             if (factoryType == null)
                 throw new NullReferenceException("No factory for this type of Product");
 
