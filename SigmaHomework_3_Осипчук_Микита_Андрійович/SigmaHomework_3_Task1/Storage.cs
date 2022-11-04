@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SigmaHomework_3_Task1
 {
-    public class Storage
+    public class Storage : IStorage
     {
-        private readonly List<ProductModel> _products;  
+        private readonly List<ProductModel> _products;
 
         public List<ProductModel> Products { get => _products; } // Не згоден з тим, що нам потрібно повертати копію ліста
 
@@ -38,7 +38,8 @@ namespace SigmaHomework_3_Task1
         {
             List<MeatModel> meats = new();
 
-            _products.ForEach(product => {
+            _products.ForEach(product =>
+            {
                 if (product is MeatModel meat)
                     meats.Add(meat);
             });

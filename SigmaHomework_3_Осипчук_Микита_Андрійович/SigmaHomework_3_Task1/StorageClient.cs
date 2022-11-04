@@ -12,9 +12,9 @@ namespace SigmaHomework_3_Task1
 {
     public class StorageClient
     {
-        private readonly Storage _storage;
+        private readonly IStorage _storage;
 
-        public StorageClient(Storage storage)
+        public StorageClient(IStorage storage)
         {
             _storage = storage;
         }
