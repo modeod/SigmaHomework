@@ -41,8 +41,8 @@ namespace SigmaHomework_3_Task1.ProductsModels
             int expirationDateInDays,
             DateTime manufacturingDate,
             decimal price = 0,
-            float weight = 0,
-            Courency courency = default) : base(name, price, weight, courency)
+            float weight = 0
+            ) : base(name, price, weight)
         {
             ExpirationDateInDays = expirationDateInDays;
             ManufacturingDate = manufacturingDate;

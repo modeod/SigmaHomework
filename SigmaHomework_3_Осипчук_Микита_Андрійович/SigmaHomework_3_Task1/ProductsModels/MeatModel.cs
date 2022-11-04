@@ -17,8 +17,8 @@ namespace SigmaHomework_3_Task1.ProductsModels
             decimal price = 0,
             float weight = 0,
             MeatType meatType = MeatType.Lamb,
-            MeatCategory meatCategory = MeatCategory.Hanging,
-            Courency courency = default) : base(name, price, weight, courency)
+            MeatCategory meatCategory = MeatCategory.Hanging
+            ) : base(name, price, weight)
         {
             MeatType = meatType;
             MeatCategory = meatCategory;
