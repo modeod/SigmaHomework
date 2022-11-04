@@ -9,12 +9,6 @@ namespace SigmaHomework_3_Task1
 {
     public class Check
     {
-        public void Print(Cart cart)
-        {
-            Console.WriteLine("Print CART:");
-            cart.Products.ForEach(x => Print(x)); // Stringbuilder?
-        }
-
         public void Print(Buy buy)
         {
             Console.ForegroundColor = ConsoleColor.Green;

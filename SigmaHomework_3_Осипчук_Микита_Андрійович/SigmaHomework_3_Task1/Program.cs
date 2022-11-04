@@ -20,8 +20,6 @@ namespace SigmaHomework_3_Task1
             Buy buyKittens = new(productKitten, 6);
             Buy buyBobs = new(productBob, 2);
 
-            Cart cart = new Cart(buyKittens, buyBobs);
-
             check.Print(productKitten);
             check.Print(buyKittens);
             check.Print(productBob);
