@@ -84,7 +84,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
             return $"- [{Name} ({this.GetType()})] Weight {Weight} c.u.; Price {Price} {Courency};";
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() // Equals was overriden in previous homeworks
         {
             int hash = 17;
             hash = hash * 23 + Weight.GetHashCode();
@@ -93,7 +93,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
             return hash;
         }
 
-        public override bool Equals(object? obj) 
+        public override bool Equals(object? obj) // Equals was overriden in previous homeworks
         {
             var product = obj as ProductModel;
 

@@ -33,7 +33,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
             return priceByCategory + percentages * priceByCategory / 100M;
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() // Equals was overriden in previous homeworks
         {
             int hash = base.GetHashCode();
             hash = hash * 23 + MeatType.GetHashCode();
@@ -41,7 +41,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
             return hash;
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object? obj) // Equals was overriden in previous homeworks
         {
             var meat = obj as MeatModel;
             if (meat == null)
