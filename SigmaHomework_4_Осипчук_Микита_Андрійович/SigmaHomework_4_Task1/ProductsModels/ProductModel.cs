@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,15 @@ using SigmaHomework_4_Task1.Enums;
 
 namespace SigmaHomework_4_Task1.ProductsModels
 {
-    public class ProductModel : ICloneable
+    public class ProductModel : ICloneable, IComparable
     {
+        private Guid _guid;
         private float _weight;
         private decimal _price;
         private Courency _courency;
 
         public string Name { get; set; }
-
+        public Guid Guid { get => _guid; }
         public Courency Courency { get => _courency; set => _courency = value; }
 
         public virtual decimal Price
@@ -52,10 +54,17 @@ namespace SigmaHomework_4_Task1.ProductsModels
 
         public ProductModel(string name, decimal priceInUAH = 0, float weightInKilograms = 0, Courency courency = default)
         {
+            _guid = Guid.NewGuid();
             Name = name;
             Price = priceInUAH;
             Weight = weightInKilograms;
             Courency = courency;
+        }
+
+        public Guid RegenerateGUID()
+        {
+            _guid = Guid.NewGuid();
+            return _guid;
         }
 
         public virtual decimal GetChangedPrice(int percentages)
@@ -111,5 +120,59 @@ namespace SigmaHomework_4_Task1.ProductsModels
         {
             return MemberwiseClone(); // We do not need deep copy for now???
         }
+
+        public int CompareTo(object? obj)
+        {
+            ProductModel? product = obj as ProductModel;
+            if( product == null)
+                return -1;
+
+            return ((IComparable)_guid).CompareTo(product.Guid);
+        }
+
+        public class SortByNameAscendingComparer : IComparer
+        {
+            public int Compare(object? x, object? y)
+            {
+                if ((x is null) || (y is null))
+                {
+                    return 0;
+                }
+
+                ProductModel? prod1 = x as ProductModel;
+                ProductModel? prod2 = y as ProductModel;
+
+                string prod1Name = prod1?.Name ?? "";
+                string prod2Name = prod2?.Name ?? "";
+
+                return prod1Name.CompareTo(prod2Name);
+            }
+        }
+
+        public static IComparer SortByNameAscending() =>
+            new SortByNameAscendingComparer();
+
+        public class SortByNameDescendingComparer : IComparer
+        {
+            public int Compare(object? x, object? y)
+            {
+                if ((x is null) || (y is null))
+                {
+                    return 0;
+                }
+
+                ProductModel? prod1 = x as ProductModel;
+                ProductModel? prod2 = y as ProductModel;
+
+                string prod1Name = prod1?.Name ?? "";
+                string prod2Name = prod2?.Name ?? "";
+
+                return prod2Name.CompareTo(prod1Name);
+            }
+        }
+
+        public static IComparer SortByNameDescending() =>
+                new SortByNameDescendingComparer();
+
     }
 }
