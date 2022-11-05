@@ -12,7 +12,7 @@ namespace SigmaHomework_5_Task1
 
             Console.WriteLine("Hello, World!");
 
-            CheckChild check = new Check();
+            CheckChild check = new CheckChild();
 
             ProductModel productKitten = new("Goose", 20M, 3.5F);
             ProductModel productBob = new("Milk", 1, 72.4F, Courency.USD);
