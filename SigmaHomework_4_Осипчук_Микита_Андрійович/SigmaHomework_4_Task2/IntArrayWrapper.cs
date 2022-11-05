@@ -88,8 +88,8 @@ namespace SigmaHomework_4_Task2
             ColorHorizontalLine secondLineToReturn = secondlongestLine;
 
 
-            int longColor = (int)currentLine.Color;
-            int secondColor = (int)currentLine.Color;
+            int longColor = (int)longestLineToReturn.Color;
+            int secondColor = (int)secondLineToReturn.Color;
 
             if (!primeArray.Contains(longColor))
                 longestLineToReturn.Color = null;
