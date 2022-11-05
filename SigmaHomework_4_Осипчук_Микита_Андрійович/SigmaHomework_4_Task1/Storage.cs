@@ -45,5 +45,39 @@ namespace SigmaHomework_4_Task1
 
             return meats;
         }
+
+        public Storage SortProductsByIdAscending()
+        {
+            _products.Sort();
+            return this;
+        }
+
+        public Storage SortProductsByNameAscending()
+        {
+            _products.Sort(ProductModel.SortByNameAscending());
+            return this;
+        }
+
+        public Storage SortProductsByNameDescending()
+        {
+            _products.Sort(ProductModel.SortByNameDescending());
+            return this;
+        }
+
+        public Storage SortProductsByKeySelectorAscending<TKey>(Func<ProductModel, TKey> selector) // Обертка над ордерБай?
+        {
+            List<ProductModel> collection = _products.OrderBy(selector).ToList();// debug
+            _products.Clear();
+            _products.AddRange(collection);
+            return this;
+        }
+
+        public Storage SortProductsByKeySelectorDescending<TKey>(Func<ProductModel, TKey> selector) // Обертка над ордерБай?
+        {
+            List<ProductModel> collection = _products.OrderByDescending(selector).ToList(); // debug
+            _products.Clear();
+            _products.AddRange(collection);
+            return this;
+        }
     }
 }

@@ -90,7 +90,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
 
         public override string ToString()
         {
-            return $"- [{Name} ({this.GetType()})] Weight {Weight} c.u.; Price {Price} {Courency};";
+            return $"--- [{Name} ({this.GetType().Name})] Weight {Weight} c.u.; Price {Price} {Courency};\n ({Guid})";
         }
 
         public override int GetHashCode() // Equals was overriden in previous homeworks
@@ -130,48 +130,42 @@ namespace SigmaHomework_4_Task1.ProductsModels
             return ((IComparable)_guid).CompareTo(product.Guid);
         }
 
-        public class SortByNameAscendingComparer : IComparer
+        public class SortByNameAscendingComparer : IComparer<ProductModel>
         {
-            public int Compare(object? x, object? y)
+            public int Compare(ProductModel? x, ProductModel? y)
             {
                 if ((x is null) || (y is null))
                 {
                     return 0;
                 }
 
-                ProductModel? prod1 = x as ProductModel;
-                ProductModel? prod2 = y as ProductModel;
-
-                string prod1Name = prod1?.Name ?? "";
-                string prod2Name = prod2?.Name ?? "";
+                string prod1Name = x?.Name ?? "";
+                string prod2Name = y?.Name ?? "";
 
                 return prod1Name.CompareTo(prod2Name);
             }
         }
 
-        public static IComparer SortByNameAscending() =>
+        public static IComparer<ProductModel> SortByNameAscending() =>
             new SortByNameAscendingComparer();
 
-        public class SortByNameDescendingComparer : IComparer
+        public class SortByNameDescendingComparer : IComparer<ProductModel>
         {
-            public int Compare(object? x, object? y)
+            public int Compare(ProductModel? x, ProductModel? y)
             {
                 if ((x is null) || (y is null))
                 {
                     return 0;
                 }
 
-                ProductModel? prod1 = x as ProductModel;
-                ProductModel? prod2 = y as ProductModel;
-
-                string prod1Name = prod1?.Name ?? "";
-                string prod2Name = prod2?.Name ?? "";
+                string prod1Name = x?.Name ?? "";
+                string prod2Name = y?.Name ?? "";
 
                 return prod2Name.CompareTo(prod1Name);
             }
         }
 
-        public static IComparer SortByNameDescending() =>
+        public static IComparer<ProductModel> SortByNameDescending() =>
                 new SortByNameDescendingComparer();
 
     }
