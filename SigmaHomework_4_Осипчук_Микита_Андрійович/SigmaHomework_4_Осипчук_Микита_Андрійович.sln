@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaHomework_4_Task1", "SigmaHomework_4_Task1\SigmaHomework_4_Task1.csproj", "{4517D563-6582-4277-BF1C-FF8BFF654FE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4517D563-6582-4277-BF1C-FF8BFF654FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4517D563-6582-4277-BF1C-FF8BFF654FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4517D563-6582-4277-BF1C-FF8BFF654FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4517D563-6582-4277-BF1C-FF8BFF654FE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6C9DF57-957E-4AE1-93CE-A03697BE3F7B}
+	EndGlobalSection
+EndGlobal
