@@ -56,27 +56,26 @@ namespace SigmaHomework_4_Task2
             return sb.ToString();
         }
 
-        
 
-        public FrequencyTable<T> OrderedByAscendingKeys()
+        public FrequencyTable<T> OrderByAscendingKeys()
         {
             _frequencyTableDictionatry = _frequencyTableDictionatry.OrderBy(kv => kv.Key).ToDictionary(kv => kv.Key, kv => kv.Value);
             return this;
         }
 
-        public FrequencyTable<T> OrderedByAscendingValues()
+        public FrequencyTable<T> OrderByAscendingValues()
         {
             _frequencyTableDictionatry = _frequencyTableDictionatry.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
             return this;
         }
 
-        public FrequencyTable<T> OrderedByDescendingKeys()
+        public FrequencyTable<T> OrderByDescendingKeys()
         {
             _frequencyTableDictionatry = _frequencyTableDictionatry.OrderByDescending(kv => kv.Key).ToDictionary(kv => kv.Key, kv => kv.Value);
             return this;
         }
 
-        public FrequencyTable<T> OrderedByDescendingValues()
+        public FrequencyTable<T> OrderByDescendingValues()
         {
             _frequencyTableDictionatry = _frequencyTableDictionatry.OrderByDescending(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
             return this;

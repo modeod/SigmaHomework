@@ -11,6 +11,8 @@ namespace SigmaHomework_4_Task2
     internal class IntArrayWrapper : IEnumerable<int>
     {
         private int[] _array;
+        private int _maxNumber;
+        private int _minNumber;
 
         public int this[int index]
         {
@@ -19,6 +21,8 @@ namespace SigmaHomework_4_Task2
         }
 
         public int Lenght { get => _array.Length; }
+        public int MaxNumber { get => _maxNumber; }
+        public int MinNumber { get => _minNumber; }
 
         public IntArrayWrapper(int minValueInclusive = 0, int maxValueExclusive = 1, int lenght = 1)
         {
@@ -27,83 +31,82 @@ namespace SigmaHomework_4_Task2
 
         public IntArrayWrapper GenerateArray(int minValueInclusive, int maxValueExclusive, int lenght)
         {
+            _minNumber = minValueInclusive;
+            _maxNumber = maxValueExclusive;
+
             Random rnd = new Random();
             _array = new int[lenght];
             for (int i = 0; i < lenght; i++)
                 _array[i] = rnd.Next(minValueInclusive, maxValueExclusive);
 
-            return this;    
+
+            //_array = new int[] { 0, 10, 9, 9, 1, 7, 7, 7, 5, 5, 9, 7, 9, 4, 3, 3, 3, 3 };
+            //_array = new int[] { 3, 4, 6, 3, 6, 5, 8, 1, 1, 10, 4, 5, 8, 2, 5, 8 };
+            return this;
         }
 
-        public (ColorHorizontalLine, ColorHorizontalLine) Find2GreaterPrimeSequences()
+        public (ColorHorizontalLine longest, ColorHorizontalLine secondLongest) Find2GreaterPrimeSequences()
         {
-            int[] primeArray = GeneratePrimeNumbersTo(_array.Length);
+            int[] primeArray = GeneratePrimeNumbersTo(_maxNumber);
+            bool nextLine = false;
 
             ColorHorizontalLine longestLine = new ColorHorizontalLine(
-                    new Point(0, 0),
-                    new Point(0, 0),
-                    _array[0]);
+                    0, 0, 0);
             ColorHorizontalLine secondlongestLine = new ColorHorizontalLine(
-                    new Point(0, 0),
-                    new Point(0, 0),
-                    _array[0]);
+                    0, 0, 0); ;
 
             ColorHorizontalLine currentLine = new ColorHorizontalLine(
-                    new Point(0, 0),
-                    new Point(0, 0),
-                    _array[0]);
+                    0, 0, 0);
 
-            for (int x = 1; x < _array.Length; x++)
+            for (int x = 0; x < _array.Length; x++)
             {
                 int currentColor = _array[x];
+                if ( ! primeArray.Contains(currentColor))
+                {
+                    nextLine = true;
+                    continue;
+                }
 
-                if (currentColor != currentLine.Color)
+                if (nextLine || currentColor != currentLine.Color)
                 {
                     currentLine = new ColorHorizontalLine();
-                    currentLine.FirstPoint = new Point(x, 0);
+                    currentLine.FirstPoint = x;
                     currentLine.Color = currentColor;
                 }
 
-                currentLine.SecondPoint = new Point(x, 0);
+                currentLine.SecondPoint = x;
 
-                if (currentLine.Color != null)
+
+                if (currentLine.Lenght > longestLine.Lenght || longestLine.Color == 0)
                 {
-                    int currenThisColor = (int)currentLine.Color;
-                    if (primeArray.Contains(currenThisColor))
-                    {
-                        if (currentLine.LenghtHorizontal > longestLine.LenghtHorizontal)
-                        {
-                            longestLine = currentLine;
-                            secondlongestLine = longestLine;
-                        }
-                        else if (currentLine.LenghtHorizontal > secondlongestLine.LenghtHorizontal)
-                        {
-                            secondlongestLine = currentLine;
-                        }
-                    }
+                    if(longestLine.FirstPoint != currentLine.FirstPoint)
+                        secondlongestLine = longestLine;
+                    longestLine = currentLine;
                 }
+                else if (currentLine.Lenght > secondlongestLine.Lenght || secondlongestLine.Color == 0 && currentLine.Color != longestLine.Color)
+                { 
+                    secondlongestLine = currentLine;
+                }
+
+                nextLine = false;
             }
 
-            ColorHorizontalLine longestLineToReturn = longestLine;
-            ColorHorizontalLine secondLineToReturn = secondlongestLine;
 
-
-            int longColor = (int)longestLineToReturn.Color;
-            int secondColor = (int)secondLineToReturn.Color;
+            int longColor = (int)longestLine.Color;
+            int secondColor = (int)secondlongestLine.Color;
 
             if (!primeArray.Contains(longColor))
-                longestLineToReturn.Color = null;
+                longestLine.Color = null;
 
             if (!primeArray.Contains(secondColor))
-                secondLineToReturn.Color = null;
+                secondlongestLine.Color = null;
 
-            return (longestLineToReturn, secondLineToReturn);
+            return (longestLine, secondlongestLine);
         }
 
         public int[] GeneratePrimeNumbersTo(int max)
         {
             List<int> primes = new List<int>();
-            primes.Add(1);
             for (int i = 2; i <= max; i++)
             {
                 bool b = true;
@@ -136,6 +139,14 @@ namespace SigmaHomework_4_Task2
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new();
+            for (int i = 0; i < _array.Length; i++)
+                sb.Append(_array[i] + " ");
+            return sb.ToString();
         }
     }
 }

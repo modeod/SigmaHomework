@@ -9,8 +9,8 @@ namespace SigmaHomework_4_Task2
 {
     internal struct ColorHorizontalLine
     {
-        public Point FirstPoint { get; set; }
-        public Point SecondPoint { get; set; }
+        public int FirstPoint { get; set; }
+        public int SecondPoint { get; set; }
 
         private int? _color = default;
 
@@ -22,15 +22,15 @@ namespace SigmaHomework_4_Task2
             }
         }
 
-        public int LenghtHorizontal { get => SecondPoint.X - FirstPoint.X + 1; }
+        public int Lenght { get => SecondPoint - FirstPoint + 1; }
 
         public ColorHorizontalLine()
         {
-            FirstPoint = new Point(0, 0);
-            SecondPoint = new Point(0, 0);
+            FirstPoint = default;
+            SecondPoint =  default;
         }
 
-        public ColorHorizontalLine(Point firstPoint, Point secondPoint, int color)
+        public ColorHorizontalLine(int firstPoint, int secondPoint, int color)
         {
             FirstPoint = firstPoint;
             SecondPoint = secondPoint;
@@ -39,7 +39,7 @@ namespace SigmaHomework_4_Task2
 
         public override string ToString()
         {
-            return $"First point = ({FirstPoint}), Second point = ({SecondPoint}).\nLenght = {this.LenghtHorizontal}, Color = {this.Color}";
+            return $"First point = {FirstPoint}, Second point = {SecondPoint}.\n   Lenght = {Lenght}, Color = {Color}";
         }
     }
 }

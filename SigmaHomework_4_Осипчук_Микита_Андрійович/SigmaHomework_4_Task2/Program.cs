@@ -6,18 +6,31 @@
         {
             Console.WriteLine("Hello, World!");
 
-            IntArrayWrapper wrapper = new IntArrayWrapper(0, 16, 16);
+            IntArrayWrapper wrapper = new IntArrayWrapper(0, 11, 16);
+            Console.WriteLine(wrapper);
+
+
             FrequencyTable<int> frequencyTable = new FrequencyTable<int>();
 
-            Console.WriteLine(frequencyTable.FillFrequencyTable(wrapper.ToArray()));
+            frequencyTable.FillFrequencyTable(wrapper.ToArray());
+
+            Console.WriteLine(frequencyTable);
             Console.WriteLine(frequencyTable.Max);
+
+            Console.WriteLine(new String('-', 10));
+
+            frequencyTable.OrderByAscendingKeys();
+            Console.WriteLine(frequencyTable);
+            Console.WriteLine(frequencyTable.Max);
+
+            Console.WriteLine(new String('-', 10));
 
             (ColorHorizontalLine longest, ColorHorizontalLine second) lines = wrapper.Find2GreaterPrimeSequences();
             if (lines.longest.Color != null)
                 Console.WriteLine("LongestPrimeLine: " + lines.longest);
 
             if (lines.second.Color != null)
-                Console.WriteLine("SecondPrimeLine: " + lines.longest);
+                Console.WriteLine("SecondPrimeLine: " + lines.second);
 
             Console.ReadKey();
         }
