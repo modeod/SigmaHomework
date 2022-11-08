@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SigmaHomework2_Task1
-{
+{// чи була потреба організовувати наслідування? краще було створити різні методи генерації наповнення
     public class DiagonalMatrix : MMMatrix
     {
         public DiagonalMatrix(int n) : base(n, n) { }
 
         public override MMMatrix Fill(bool revert = false)
-        {
+        {//спробуйте запустити разом зімною на парі
             (int y, int x) currCoord = (0, 0);
+            //Тут гарно
             (int dy, int dx) deltaUp = (-1, +1);
             (int dy, int dx) deltaDown = (+1, -1);
             bool isUp = !revert;
