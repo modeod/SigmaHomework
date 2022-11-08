@@ -14,7 +14,7 @@ namespace SigmaHomework2_Task2
         private readonly int _m;
 
         //TODO: Add indexator for matrix to check if value > 16
-
+// Бажано мати можливість ініціалізувати об'єкт класу не тільки через генерацію.
         public ColorMatrix(int y = 5, int x = 5)
         {
             _matrix = new byte[y, x];
@@ -27,9 +27,9 @@ namespace SigmaHomework2_Task2
                 new Point(0, 0),
                 new Point(0, 0),
                 _matrix[0, 0]);
-
+// Не люблю, коли індекси іменують x і y. Якщо пишуть в Угорській нотації, то так точно не можна.
             for (int y = 0; y < _n; y++)
-            {
+            {//алгоритмічно не всі горизонтальні ліній зловили
                 ColorHorizontalLine currentLine = new ColorHorizontalLine(
                     new Point(0, y),
                     new Point(0, y),
