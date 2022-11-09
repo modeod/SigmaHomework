@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SigmaHomework_5_Task1.Enums;
 using SigmaHomework_5_Task1.ProductFactories;
 
-namespace SigmaHomework_5_Task1
+namespace SigmaHomework_5_Task1.StorageEcosystem
 {
     public class StorageClient
     {
@@ -18,6 +18,8 @@ namespace SigmaHomework_5_Task1
         {
             _storage = storage;
         }
+
+
 
         public void Print()
         {
@@ -30,8 +32,8 @@ namespace SigmaHomework_5_Task1
 
         public void AddProductsToStorageWithConsole()
         {
-            string? assemblyName = Assembly.GetAssembly(this.GetType())?.GetName().Name;
-            if(assemblyName == null)
+            string? assemblyName = Assembly.GetAssembly(GetType())?.GetName().Name;
+            if (assemblyName == null)
                 throw new NullReferenceException($"Assembly was not found");
 
             string typePath = $"{assemblyName}.ProductsModels.ProductModel";
