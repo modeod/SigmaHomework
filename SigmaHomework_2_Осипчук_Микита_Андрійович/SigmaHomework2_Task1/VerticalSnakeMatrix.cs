@@ -31,6 +31,7 @@ namespace SigmaHomework2_Task1
                 setMatrixElement = (ref int[,] toMatrix, int x, int y, int value) => toMatrix[y, x] = value;
             }
 
+            //Update if else to x+=2 ... 
             for (int x = 0; x < side1; x++)
             {
                 if (x % 2 == 0)

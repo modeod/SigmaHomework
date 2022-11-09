@@ -27,9 +27,10 @@ namespace SigmaHomework2_Task2
                 new Point(0, 0),
                 new Point(0, 0),
                 _matrix[0, 0]);
-// Не люблю, коли індекси іменують x і y. Якщо пишуть в Угорській нотації, то так точно не можна.
+
             for (int y = 0; y < _n; y++)
-            {//алгоритмічно не всі горизонтальні ліній зловили
+            {
+                //алгоритмічно не всі горизонтальні ліній зловили ?????????
                 ColorHorizontalLine currentLine = new ColorHorizontalLine(
                     new Point(0, y),
                     new Point(0, y),
