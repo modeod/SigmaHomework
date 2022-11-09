@@ -15,7 +15,10 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
         public delegate void AddedItemHandler(StorageItem updatedItem, uint amount);
         public event AddedItemHandler? AddedItemNotify;
 
-        public delegate void UpdatedItemHandler(ProductModel updatedItem, ProductModel oldItem);
+        public delegate void UpdatedProductInfoHandler(ProductModel updatedItem, ProductModel oldItem);
+        public event UpdatedProductInfoHandler? UpdatedProductInfoNotify;
+
+        public delegate void UpdatedItemHandler(StorageItem updatedItem, StorageItem oldItem);
         public event UpdatedItemHandler? UpdatedItemNotify;
 
         public delegate void RemovedItemHandler(StorageItem updatedItem, uint amount);
@@ -30,10 +33,13 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
             get => (StorageItem)_products[index].Clone();
             set
             {
+                if (value == null)
+                    throw new NullReferenceException(nameof(value));
+
                 StorageItem item = _products[index];
 
-                UpdatedItemNotify?.Invoke((ProductModel)value.Clone(), (ProductModel)item.Clone());
-                item.Product = (ProductModel)value.Clone();
+                _products[index] = (StorageItem)value.Clone();
+                UpdatedItemNotify?.Invoke((StorageItem)value.Clone(), (StorageItem)item.Clone());
             }
         }
 
@@ -42,15 +48,17 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
             get => (StorageItem?)_products.FirstOrDefault(item => model.Equals(item.Product))?.Clone();
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                if (value == null) 
+                    throw new NullReferenceException(nameof(value));
 
-                StorageItem? item = _products.FirstOrDefault(item => model.Equals(item.Product));
-                if (item == null)
-                    throw new KeyNotFoundException();
+                int itemIndex = _products.FindIndex(item => model.Equals(item.Product));
+                if (itemIndex == -1)
+                    throw new KeyNotFoundException(nameof(value));
 
-                UpdatedItemNotify?.Invoke((ProductModel)value.Clone(), (ProductModel)item.Clone());
+                StorageItem item = _products[itemIndex];
 
-                item.Product = (ProductModel)value.Clone();
+                _products[itemIndex] = (StorageItem)value.Clone();
+                UpdatedItemNotify?.Invoke((StorageItem)value.Clone(), (StorageItem)item.Clone());
             }
         }
 
@@ -94,14 +102,14 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
             return (StorageItem)item.Clone();
         }
 
-        public StorageItem UpdateItemInformation(ProductModel toUpdate, ProductModel updatedProduct)
+        public StorageItem UpdateProductInformation(ProductModel toUpdate, ProductModel updatedProduct)
         {
             StorageItem? item = _products.FirstOrDefault(item => toUpdate.Equals(item.Product));
             if (item == null)
                 throw new KeyNotFoundException();
 
             item.Product = (ProductModel)updatedProduct.Clone();
-            UpdatedItemNotify?.Invoke((ProductModel)toUpdate.Clone(), (ProductModel)updatedProduct.Clone());
+            UpdatedProductInfoNotify?.Invoke((ProductModel)toUpdate.Clone(), (ProductModel)updatedProduct.Clone());
 
             return (StorageItem)item.Clone();
         }
