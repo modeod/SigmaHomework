@@ -24,8 +24,11 @@ namespace SigmaHomework_6_ConsoleClient
                 parser);
 
             QuarterModel quart = quarterFileService.GetQuarterFromFile();
+            QuarterService quarterService = new(quart);
 
             quarterFileService.WriteReadableQuarterToFile(quart);
+            quarterFileService.WriteReadableQuarterItemInformationToFile(quart[0]);
+            quarterFileService.WriteDaysPassedFromLastEnergyMeterReadingToFile(quarterService.GetDaysPassedFromLastEnergyMeterReading());
 
             Console.WriteLine(File.ReadAllText(InputFilePath));
         }

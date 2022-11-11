@@ -53,21 +53,28 @@ namespace SigmaHomework_6_ConsoleClient.Services
             }
 
             sb.AppendLine($"\nFlats Number = {quarter.ElectricityMeters.Count()}; Year {quarter.Year}");
+            sb.AppendLine();
 
             _fileHandler.WriteOverride(sb.ToString());
         }
 
         public void WriteReadableQuarterItemInformationToFile(QuarterItemModel item)
         {
+            StringBuilder sb = new StringBuilder();
+
             var headerTable = GetTableHeader("1st month", "2nd month", "3rd month");
             var result = QuarterItemToFormatString(item);
-            _fileHandler.Write(headerTable + "\n" + result);
+            sb.Append(headerTable);
+            sb.AppendLine(new string('-', 145));
+            sb.AppendLine(result);
+            sb.AppendLine();
+            _fileHandler.Write(sb.ToString());
         }
 
         private string GetTableHeader(string firstMonthName, string secondMonthName, string thirdMonthName)
         {
             //TODO: Make formatting colums flexible
-            return string.Format("|{0,-6}|{1,-20}|{2,-20}|{3,-20}|{4,-21}|{5,-21}|{6,-21}|",
+            return string.Format("|{0,-12}|{1,-20}|{2,-20}|{3,-20}|{4,-21}|{5,-21}|{6,-21}|",
                             "Room number", "Owner", "Input El. value", "Output El. value",
                             "Date for " + firstMonthName, "Date for " + secondMonthName, "Date for " + thirdMonthName);
         }
@@ -75,7 +82,7 @@ namespace SigmaHomework_6_ConsoleClient.Services
         private string QuarterItemToFormatString(QuarterItemModel item)
         {
             //TODO: Make formatting colums flexible
-            return string.Format("|{0,-6}|{1,-20}|{2,-20:#}|{3,-20:#}|{4,-21:dd.MM.yy}|{5,-21:dd.MM.yy}|{6,-21:dd.MM.yy}|",
+            return string.Format("|{0,-12}|{1,-20}|{2,-20:#}|{3,-20:#}|{4,-21:dd.MM.yy}|{5,-21:dd.MM.yy}|{6,-21:dd.MM.yy}|",
                 item.Address.FlatNumber,
                 item.Address.Owner.Surname,
                 item.InputMeterValue,
@@ -88,17 +95,17 @@ namespace SigmaHomework_6_ConsoleClient.Services
         public void WriteDaysPassedFromLastEnergyMeterReadingToFile(Dictionary<AddressModel, int> energyMeters)
         {
             StringBuilder sb = new();
-            sb.Append("Days passed from last energy meter reading");
+            sb.AppendLine("Days passed from last energy meter reading");
 
             var header = string.Format("|{0,-9}|{1,-9}|", "Room", "Days");
             sb.AppendLine(header);
-            sb.AppendLine(new String('-', 26));
+            sb.AppendLine(new String('-', 21));
 
             foreach (var item in energyMeters)
             {
-                sb.AppendLine(string.Format("{0,-14}|{1,-9}", item.Key.FlatNumber, item.Value));
+                sb.AppendLine(string.Format("|{0,-9}|{1,-9}|", item.Key.FlatNumber, item.Value));
             }
-
+            sb.AppendLine();
             _fileHandler.Write(sb.ToString());
         }
     }

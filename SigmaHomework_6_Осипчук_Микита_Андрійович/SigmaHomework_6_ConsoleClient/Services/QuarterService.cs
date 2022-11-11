@@ -35,7 +35,7 @@ namespace SigmaHomework_6_ConsoleClient.Services
         public IEnumerable<AddressModel> FindAddressesNotUsedEvecticity() =>
             _quarter.ElectricityMeters.Where(item => item.OutputMeterValue - item.InputMeterValue == 0).Select(item => item.Address);
 
-        public IDictionary<AddressModel, int> GetDaysPassedFromLastEnergyMeterReading() =>
+        public Dictionary<AddressModel, int> GetDaysPassedFromLastEnergyMeterReading() =>
             _quarter.ElectricityMeters.ToDictionary(
                 item => item.Address,
                 item => (int)(( DateTime.Now - item.ThirdMonth).TotalDays)
