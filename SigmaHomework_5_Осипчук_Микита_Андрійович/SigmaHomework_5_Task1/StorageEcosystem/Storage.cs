@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 
 namespace SigmaHomework_5_Task1.StorageEcosystem
 {
+    public delegate void AddedItemHandler(StorageItem updatedItem, uint amount);
+    public delegate void UpdatedProductInfoHandler(ProductModel updatedItem, ProductModel oldItem);
+    public delegate void UpdatedItemHandler(StorageItem updatedItem, StorageItem oldItem);
+    public delegate void RemovedItemHandler(StorageItem updatedItem, uint amount);
+
     public class Storage
     {
-        public delegate void AddedItemHandler(StorageItem updatedItem, uint amount);
         public event AddedItemHandler? AddedItemNotify;
 
-        public delegate void UpdatedProductInfoHandler(ProductModel updatedItem, ProductModel oldItem);
         public event UpdatedProductInfoHandler? UpdatedProductInfoNotify;
 
-        public delegate void UpdatedItemHandler(StorageItem updatedItem, StorageItem oldItem);
         public event UpdatedItemHandler? UpdatedItemNotify;
 
-        public delegate void RemovedItemHandler(StorageItem updatedItem, uint amount);
         public event RemovedItemHandler? RemovedItemNotify;
 
         private readonly List<StorageItem> _products;

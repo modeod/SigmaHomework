@@ -49,19 +49,35 @@ namespace SigmaHomework2_Task3
             return this;
         }
 
-        public bool IsThereAThroughHole()
+        public bool IsThereAThroughHole(
+            out (int I, int J, int K) startPoint, 
+            out (int I, int J, int K) endPoint
+            )
         {
             bool checkLine(int startI, int startJ, int startK,
-                int deltaI, int deltaJ, int deltaK)
+                int deltaI, int deltaJ, int deltaK,
+                out (int I, int J, int K) endPoint)
             {
                 int length = 1;
-                while (
-                    (startI > -1 && startI < _sideLenght) &&
-                    (startJ > -1 && startJ < _sideLenght) &&
-                    (startK > -1 && startK < _sideLenght))
+
+                endPoint = (startI, startJ, startK);
+
+                while (true)
+                //    (startI > -1 && startI < _sideLenght) &&
+                //    (startJ > -1 && startJ < _sideLenght) &&
+                //    (startK > -1 && startK < _sideLenght))
                 {
-                    if (_cube[startI, startJ, startK] == 1)
-                        return false;
+                    try
+                    {
+                        if (_cube[startI, startJ, startK] == 1)
+                            return false;
+
+                        endPoint = (startI, startJ, startK);
+                    }
+                    catch (IndexOutOfRangeException ex)
+                    {
+                        break;
+                    }
 
                     length += 1;
                     startI += deltaI;
@@ -154,6 +170,7 @@ namespace SigmaHomework2_Task3
              *      (это условие легко добавить, буквально убрав проверку на длину в IsThereAThroughHole в случае чего)
              */
 
+            startPoint = endPoint = (0, 0, 0);
 
             //_cube[i, j, k]
             // 0 - empty, 1 - filled
@@ -164,43 +181,43 @@ namespace SigmaHomework2_Task3
                     byte currentValue = _cube[0, j, k];
                     if (currentValue == 1) continue;
 
-                    int deltaI;
+                    startPoint = (0, j, k);
 
-                    //Check center 0 0
-                    deltaI = 1;
-                    if (checkLine(0 + deltaI, j, k, deltaI, 0, 0))
+                   //Check center 0 0
+                    int deltaI = 1;
+                    if (checkLine(0 + deltaI, j, k, deltaI, 0, 0, out endPoint))
                         return true;
 
                     // check +1 +1
-                    if (checkLine(0 + deltaI, j + 1, k + 1, deltaI, 1, +1))
+                    if (checkLine(0 + deltaI, j + 1, k + 1, deltaI, 1, +1, out endPoint))
                         return true;
 
                     // check +1 0
-                    if (checkLine(0 + deltaI, j + 1, k, deltaI, 1, 0))
+                    if (checkLine(0 + deltaI, j + 1, k, deltaI, 1, 0, out endPoint))
                         return true;
 
                     // check +1 -1
-                    if (checkLine(0 + deltaI, j + 1, k - 1, deltaI, 1, -1))
+                    if (checkLine(0 + deltaI, j + 1, k - 1, deltaI, 1, -1, out endPoint))
                         return true;
 
                     // check 0  -1
-                    if (checkLine(0 + deltaI, j, k - 1, deltaI, 0, -1))
+                    if (checkLine(0 + deltaI, j, k - 1, deltaI, 0, -1, out endPoint))
                         return true;
 
                     // check -1  -1
-                    if (checkLine(0 + deltaI, j - 1, k - 1, deltaI, -1, -1))
+                    if (checkLine(0 + deltaI, j - 1, k - 1, deltaI, -1, -1, out endPoint))
                         return true;
 
                     // check -1 0
-                    if (checkLine(0 + deltaI, j - 1, k, deltaI, -1, 0))
+                    if (checkLine(0 + deltaI, j - 1, k, deltaI, -1, 0, out endPoint))
                         return true;
 
                     // check -1 +1
-                    if (checkLine(0 + deltaI, j - 1, k + 1, deltaI, -1, 1))
+                    if (checkLine(0 + deltaI, j - 1, k + 1, deltaI, -1, 1, out endPoint))
                         return true;
 
                     // check 0 +1
-                    if (checkLine(0 + deltaI, j, k + 1, deltaI, 0, 1))
+                    if (checkLine(0 + deltaI, j, k + 1, deltaI, 0, 1, out endPoint))
                         return true;
                 }
             }
@@ -210,34 +227,35 @@ namespace SigmaHomework2_Task3
                 for (int k = 0; k < _sideLenght; k++)
                 {
                     int currentValue = _cube[i, 0, k];
-
                     if (currentValue == 1) continue;
 
+                    startPoint = (i, 0, k);
+
                     int deltaJ = 1;
-                    if (checkLine(i, 0 + deltaJ, k, 0, deltaJ, 0))
+                    if (checkLine(i, 0 + deltaJ, k, 0, deltaJ, 0, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, 0 + deltaJ, k + 1, 1, deltaJ, 1))
+                    if (checkLine(i + 1, 0 + deltaJ, k + 1, 1, deltaJ, 1, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, 0 + deltaJ, k, 1, deltaJ, 0))
+                    if (checkLine(i + 1, 0 + deltaJ, k, 1, deltaJ, 0, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, 0 + deltaJ, k - 1, 1, deltaJ, -1))
+                    if (checkLine(i + 1, 0 + deltaJ, k - 1, 1, deltaJ, -1, out endPoint))
                         return true;
 
-                    if (checkLine(i, 0 + deltaJ, k - 1, 0, deltaJ, -1))
-                        return true;
-
-                    //Optimize triangle
-                    if (checkLine(i - 1, 0 + deltaJ, k - 1, -1, deltaJ, -1))
+                    if (checkLine(i, 0 + deltaJ, k - 1, 0, deltaJ, -1, out endPoint))
                         return true;
 
                     //Optimize triangle
-                    if (checkLine(i - 1, 0 + deltaJ, k + 1, -1, deltaJ, 1))
+                    if (checkLine(i - 1, 0 + deltaJ, k - 1, -1, deltaJ, -1, out endPoint))
                         return true;
 
-                    if (checkLine(i, 0 + deltaJ, k + 1, 0, deltaJ, 1))
+                    //Optimize triangle
+                    if (checkLine(i - 1, 0 + deltaJ, k + 1, -1, deltaJ, 1, out endPoint))
+                        return true;
+
+                    if (checkLine(i, 0 + deltaJ, k + 1, 0, deltaJ, 1, out endPoint))
                         return true;
                 }
             }
@@ -249,28 +267,30 @@ namespace SigmaHomework2_Task3
                     int currentValue = _cube[i, j, 0];
                     if (currentValue == 1) continue;
 
+                    startPoint = (i, j, 0);
+
                     int deltaK = 1;
-                    if (checkLine(i, j, 0 + deltaK, 0, 0, deltaK))
+                    if (checkLine(i, j, 0 + deltaK, 0, 0, deltaK, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, j + 1, 0 + deltaK, 1, 1, deltaK))
+                    if (checkLine(i + 1, j + 1, 0 + deltaK, 1, 1, deltaK, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, j, 0 + deltaK, 1, 0, deltaK))
+                    if (checkLine(i + 1, j, 0 + deltaK, 1, 0, deltaK, out endPoint))
                         return true;
 
-                    if (checkLine(i + 1, j - 1, 0 + deltaK, 1, -1, deltaK))
-                        return true;
-
-                    //Optimize triangle
-                    if (checkLine(i - 1, j - 1, 0 + deltaK, -1, -1, deltaK))
+                    if (checkLine(i + 1, j - 1, 0 + deltaK, 1, -1, deltaK, out endPoint))
                         return true;
 
                     //Optimize triangle
-                    if (checkLine(i - 1, j + 1, 0 + deltaK, -1, 1, deltaK))
+                    if (checkLine(i - 1, j - 1, 0 + deltaK, -1, -1, deltaK, out endPoint))
                         return true;
 
-                    if (checkLine(i, j + 1, 0 + deltaK, 0, 1, deltaK))
+                    //Optimize triangle
+                    if (checkLine(i - 1, j + 1, 0 + deltaK, -1, 1, deltaK, out endPoint))
+                        return true;
+
+                    if (checkLine(i, j + 1, 0 + deltaK, 0, 1, deltaK, out endPoint))
                         return true;
                 }
             }
@@ -283,23 +303,25 @@ namespace SigmaHomework2_Task3
                     byte currentValue = _cube[lastI, j, k];
                     if (currentValue == 1) continue;
 
+                    startPoint = (lastI, j, k);
+
                     int deltaI = -1;
 
-                    if (checkLine(lastI + deltaI, j + 1, k + 1, deltaI, 1, 1))
+                    if (checkLine(lastI + deltaI, j + 1, k + 1, deltaI, 1, 1, out endPoint))
                         return true;
 
                     //Optimize triangle
-                    if (checkLine(lastI + deltaI, j + 1, k, deltaI, 1, 0))
+                    if (checkLine(lastI + deltaI, j + 1, k, deltaI, 1, 0, out endPoint))
                         return true;
 
-                    if (checkLine(lastI + deltaI, j + 1, k - 1, deltaI, 1, -1))
+                    if (checkLine(lastI + deltaI, j + 1, k - 1, deltaI, 1, -1, out endPoint))
                         return true;
 
                     //Optimize
-                    if (checkLine(lastI + deltaI, j - 1, k + 1, deltaI, -1, 1))
+                    if (checkLine(lastI + deltaI, j - 1, k + 1, deltaI, -1, 1, out endPoint))
                         return true;
 
-                    if (checkLine(lastI + deltaI, j, k + 1, deltaI, 0, 1))
+                    if (checkLine(lastI + deltaI, j, k + 1, deltaI, 0, 1, out endPoint))
                         return true;
                 }
             }
@@ -312,15 +334,16 @@ namespace SigmaHomework2_Task3
                     byte currentValue = _cube[i, lastJ, k];
                     if (currentValue == 1) continue;
 
+                    startPoint = (i, lastJ, k);
+
                     int deltaJ = -1;
-
-                    if (checkLine(i + 1, lastJ + deltaJ, k + 1, 1, deltaJ, 1))
+                    if (checkLine(i + 1, lastJ + deltaJ, k + 1, 1, deltaJ, 1, out endPoint))
                         return true;
 
-                    if (checkLine(i - 1, lastJ + deltaJ, k + 1, -1, deltaJ, 1))
+                    if (checkLine(i - 1, lastJ + deltaJ, k + 1, -1, deltaJ, 1, out endPoint))
                         return true;
 
-                    if (checkLine(i, lastJ + deltaJ, k + 1, 0, deltaJ, 1))
+                    if (checkLine(i, lastJ + deltaJ, k + 1, 0, deltaJ, 1, out endPoint))
                         return true;
 
                 }

@@ -7,34 +7,45 @@
             byte[,,] cubick = new byte[,,]
             {
                 {
-                    {1, 1, 1, 1},
+                    {1, 1, 0, 1},
                     {1, 1, 1, 1 },
                     {1, 1, 1, 1 },
                     {1, 1, 1, 1 }
                 },
                 {
-                    {1, 1, 0, 1 },
-                    {1, 1, 0, 1 },
+                    {1, 0, 0, 1 },
+                    {0, 1, 1, 1 },
                     {0, 1, 1, 1 },
                     {1, 1, 1, 1 }
                 },
                 {
                     {1, 1, 1, 1 },
                     {1, 1, 1, 1 },
-                    {1, 1, 1, 0 },
+                    {1, 1, 1, 1 },
                     {1, 1, 1, 1 }
                 },
                 {
                     {1, 1, 1, 1 },
+                    {1, 1, 0, 1 },
                     {1, 1, 1, 1 },
-                    {1, 1, 1, 1 },
-                    {1, 1, 1, 1}
+                    {1, 1, 0, 1}
                 }
             };
 
             Cube cube = new Cube(cubick);
 
-            Console.WriteLine(cube.IsThereAThroughHole());
+            bool doesLineExists = cube.IsThereAThroughHole(
+                out (int I, int J, int K) startPoint,
+                out (int I, int J, int K) endPoint);
+
+            Console.WriteLine(doesLineExists);
+
+            if (doesLineExists)
+            {
+                Console.WriteLine(startPoint);
+                Console.WriteLine(endPoint);
+            }
+            
         }
     }
 }
