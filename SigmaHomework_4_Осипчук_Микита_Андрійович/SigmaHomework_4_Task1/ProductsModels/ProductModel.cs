@@ -94,7 +94,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
         }
 
         public override int GetHashCode() // Equals was overriden in previous homeworks
-        {
+        {// І чому мені не подобається цей хард код?
             int hash = 17;
             hash = hash * 23 + Weight.GetHashCode();
             hash = hash * 23 + Price.GetHashCode();
@@ -103,7 +103,7 @@ namespace SigmaHomework_4_Task1.ProductsModels
         }
 
         public override bool Equals(object? obj) // Equals was overriden in previous homeworks
-        {
+        {// приводити до типу можна тільки, коли об'єкт є цього типу. Операції аs має передувати операція is
             var product = obj as ProductModel;
 
             if(product == null) 
