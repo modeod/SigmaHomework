@@ -111,7 +111,8 @@ namespace SigmaHomework_4_Task2
             {
                 bool b = true;
                 for (int j = 2; j < i; j++)
-                {
+                {// Особливо "цінна" друга частина умови)), а також плутаєте операцію  & і &&
+               
                     if (i % j == 0 & i % 1 == 0)
                         b = false;
                 }
