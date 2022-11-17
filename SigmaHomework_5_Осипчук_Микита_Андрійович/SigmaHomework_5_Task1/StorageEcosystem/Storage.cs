@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SigmaHomework_5_Task1.StorageEcosystem
-{
+{// Додам бали за використання делегатів і подій, але додатково треба виконувати, якщо справився АКУРАТНО! з основною задачею. Інакше будуть проблеми на тестах.
     public delegate void AddedItemHandler(StorageItem updatedItem, uint amount);
     public delegate void UpdatedProductInfoHandler(ProductModel updatedItem, ProductModel oldItem);
     public delegate void UpdatedItemHandler(StorageItem updatedItem, StorageItem oldItem);
