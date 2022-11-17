@@ -13,7 +13,9 @@ namespace SigmaHomework_4_Task1
     {
         private readonly List<ProductModel> _products;  
 
-        public List<ProductModel> Products { get => _products; } // Не згоден з тим, що нам потрібно повертати копію ліста
+        public List<ProductModel> Products { get => _products; } 
+        //  4та домашка робилася на базі 3ї, а не на базі 5ї, тому тут все залишилось у старому вигляді,
+        //бо її дедлайн був пізніше, ніж у 5ї
 
         public ProductModel this[int index]
         {
