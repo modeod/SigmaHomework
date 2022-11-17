@@ -4,7 +4,7 @@ using SigmaHomework_5_Task1.ProductsModels;
 using SigmaHomework_5_Task1.StorageEcosystem;
 
 namespace SigmaHomework_5_Task1
-{
+{//Ваші бали 95	85	100	95	100
     internal class Program
     {
         static void Main(string[] args)
