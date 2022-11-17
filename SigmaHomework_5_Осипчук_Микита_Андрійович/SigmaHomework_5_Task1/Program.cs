@@ -8,7 +8,7 @@ namespace SigmaHomework_5_Task1
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {// немає перехоплень винятків, які можуть виникати
             Console.OutputEncoding = Encoding.UTF8;
 
             Console.WriteLine("Hello, World!");
