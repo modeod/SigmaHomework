@@ -27,7 +27,7 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
 
         private readonly List<StorageItem> _products;
 
-        public ReadOnlyCollection<StorageItem> Products { get => new ReadOnlyCollection<StorageItem>(_products); } 
+        public List<StorageItem> Products { get => new List<StorageItem>(_products); } 
 
         public StorageItem this[int index]
         {
@@ -74,7 +74,7 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
             _products.ForEach(product => product.Product.ChangePriceByOnlyPercentages(percentage));
         }
 
-        public ReadOnlyCollection<StorageItem> FindMeatInStorage()
+        public List<StorageItem> FindMeatInStorage()
         {
             List<StorageItem> meats = new();
 
@@ -84,7 +84,7 @@ namespace SigmaHomework_5_Task1.StorageEcosystem
                     meats.Add((StorageItem)product.Clone());
             });
 
-            return meats.AsReadOnly();
+            return meats;
         }
 
         public StorageItem AddItem(ProductModel product, uint amount = 1)
