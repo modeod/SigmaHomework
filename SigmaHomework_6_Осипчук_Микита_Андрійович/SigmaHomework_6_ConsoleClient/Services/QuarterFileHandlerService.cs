@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace SigmaHomework_6_ConsoleClient.Services
 {
     public class QuarterFileHandlerService
-    {
+    {// з інтерфейсами - добре вийшло. Молодець! Прошу показати ідею на обговоренні для групи.
         private readonly IFileHandler _fileHandler;
         private readonly IParserService _parser;
 
