@@ -13,6 +13,7 @@ namespace SigmaHomework_6_ConsoleClient
             Console.OutputEncoding = Encoding.UTF8;
 
             string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+            //Змінні мають бути з маленької літери
             string InputFilePath = exeDir + Settings.QuarterFilePath;
             string OutputFilePath = exeDir + Settings.OutputReportFilePath;
 
