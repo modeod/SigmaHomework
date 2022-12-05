@@ -1,0 +1,51 @@
+﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
+using SigmaHomework_8_Task1.Models;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SigmaHomework_8_ConsoleClient.Services
+{
+    public class ParserService : IParserService
+    {
+        public OrderModel[] ParseTxtOrders(string[] documentByLines)
+        {
+            Dictionary<string, OrderModel> orders = new Dictionary<string, OrderModel>();
+
+            for (int i = 0; i < documentByLines.Length; i++)
+            {
+                string[] orderInfoData = documentByLines[i].Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string company = orderInfoData[0].Trim();
+                string productName = orderInfoData[1].Trim();
+                int productNum = int.Parse(orderInfoData[2].Trim());
+
+                if( ! orders.TryGetValue(company, out OrderModel order))
+                {
+                    orders.Add(company, new OrderModel(company, new Dictionary<OrderItemModel, int>()));
+                }
+
+                orders[company].Items.Add(new OrderItemModel(productName), productNum);
+            }
+
+            return orders.Select(kvp => kvp.Value).ToArray();
+        }
+
+        public SubstitutionsModel ParseTxtSubstitutions(string[] documentByLines)
+        {
+            SubstitutionsModel substitutions = new SubstitutionsModel(new Dictionary<string, string[]>());
+
+            for (int i = 0; i < documentByLines.Length; i++)
+            {
+                string[] substitutionsInfoData = documentByLines[i].Split('-', StringSplitOptions.RemoveEmptyEntries);
+                string[] productSubstitutions = substitutionsInfoData[1].Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+                substitutions.SubstitutionsDictionary.Add(substitutionsInfoData[0], productSubstitutions);
+            }
+
+            return substitutions;
+        }
+    }
+}
