@@ -130,9 +130,10 @@ namespace SigmaHomework_7_Task1.StorageEcosystem
 
             return (StorageItem)item.Clone();
         }
-
+        // ПОНЕДІЛОК Через обстріли відмінився.....
         // Технічно завдання виконано, але варіант з Лістом виявився неєєфективним (через О(N*M)). 
         // Тому у понеділок я зроблю рефакторінг усієї програми цієї. Та сторедж перейде на диктіонарі (щоб був  О(N))!
+        // ПОНЕДІЛОК Через обстріли відмінився.....
         public List<StorageItem> GetProductsFirstStorageHaveAndSecondDont(Storage secondStorage)
         {
             List<StorageItem> items = new();
@@ -159,6 +160,7 @@ namespace SigmaHomework_7_Task1.StorageEcosystem
         // b. Товари, які є спільними в обох складах.  (тобто список товарів, які є і там, і там)
         // c. Спільний список товарів, які є на обох складах, без повторів елементів. (тобто теж саме, що вище, бо я використовую стореджІтеми
         // що при додаванні однакового товару просто збільшують кількість (число) біля нього, а не додають новий стореджітем.
+
         public List<StorageItem> GetProductsInnerJoin(Storage secondStorage) =>
             _products.FindAll(prod => secondStorage.Products.Any(secondProd => secondProd.Product.Equals(prod.Product)));
     }
