@@ -160,7 +160,7 @@ namespace SigmaHomework_7_Task1.StorageEcosystem
         // b. Товари, які є спільними в обох складах.  (тобто список товарів, які є і там, і там)
         // c. Спільний список товарів, які є на обох складах, без повторів елементів. (тобто теж саме, що вище, бо я використовую стореджІтеми
         // що при додаванні однакового товару просто збільшують кількість (число) біля нього, а не додають новий стореджітем.
-
+// Чому не методи Union, Intersection і Except
         public List<StorageItem> GetProductsInnerJoin(Storage secondStorage) =>
             _products.FindAll(prod => secondStorage.Products.Any(secondProd => secondProd.Product.Equals(prod.Product)));
     }
