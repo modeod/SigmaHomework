@@ -2,10 +2,8 @@
 
 namespace SigmaHomework_8_ConsoleClient.Services.Interfaces
 {
-    public interface IParserService
+    public interface IParserOrder
     {
         OrderModel[] ParseTxtOrders(string[] documentByLines);
-
-        SubstitutionsModel ParseTxtSubstitutions(string[] documentByLines);
     }
 }

@@ -4,9 +4,9 @@
     {
         public string Company { get; set; }
 
-        public readonly Dictionary<OrderItemModel, int> Items { get; set; };
+        public Dictionary<OrderItemModel, uint> Items { get; }
 
-        public OrderModel(string company, Dictionary<OrderItemModel, int> items)
+        public OrderModel(string company, Dictionary<OrderItemModel, uint> items)
         {
             Company = company;
             this.Items = items;
@@ -15,7 +15,7 @@
         public OrderModel()
         {
             Company = "";
-            Items = new Dictionary<OrderItemModel, int>();
+            Items = new Dictionary<OrderItemModel, uint>();
         }
     }
 }

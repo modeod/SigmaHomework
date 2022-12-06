@@ -2,7 +2,7 @@
 {
     public class OrderItemModel : IEquatable<OrderItemModel?>
     {
-        string Name { get; set; }
+        public string Name { get; set; }
 
         public OrderItemModel(string name)
         {

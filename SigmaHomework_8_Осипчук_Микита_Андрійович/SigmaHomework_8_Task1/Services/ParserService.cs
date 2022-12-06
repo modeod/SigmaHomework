@@ -1,5 +1,6 @@
 ﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
 using SigmaHomework_8_Task1.Models;
+using SigmaHomework_8_Task1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SigmaHomework_8_ConsoleClient.Services
 {
-    public class ParserService : IParserService
+    public class ParserService : IParserOrder, IParserSubstitutions
     {
         public OrderModel[] ParseTxtOrders(string[] documentByLines)
         {
@@ -20,11 +21,11 @@ namespace SigmaHomework_8_ConsoleClient.Services
                 string[] orderInfoData = documentByLines[i].Split(',', StringSplitOptions.RemoveEmptyEntries);
                 string company = orderInfoData[0].Trim();
                 string productName = orderInfoData[1].Trim();
-                int productNum = int.Parse(orderInfoData[2].Trim());
+                uint productNum = uint.Parse(orderInfoData[2].Trim());
 
                 if( ! orders.TryGetValue(company, out OrderModel order))
                 {
-                    orders.Add(company, new OrderModel(company, new Dictionary<OrderItemModel, int>()));
+                    orders.Add(company, new OrderModel(company, new Dictionary<OrderItemModel, uint>()));
                 }
 
                 orders[company].Items.Add(new OrderItemModel(productName), productNum);
