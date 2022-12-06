@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SigmaHomework_8_ConsoleClient.Services.Interfaces;
+using SigmaHomework_8_Task1.Services.Interfaces;
  
-namespace SigmaHomework_8_ConsoleClient.Services
+namespace SigmaHomework_8_Task1.Services
 {
     public class FileHandler : IFileHandler
     {

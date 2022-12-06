@@ -1,6 +1,5 @@
-﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
+﻿using SigmaHomework_8_Task1.Services.Interfaces;
 using SigmaHomework_8_Task1.Models;
-using SigmaHomework_8_Task1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

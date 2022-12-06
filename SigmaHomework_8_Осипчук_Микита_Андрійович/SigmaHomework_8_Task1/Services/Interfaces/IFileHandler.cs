@@ -1,4 +1,4 @@
-﻿namespace SigmaHomework_8_ConsoleClient.Services.Interfaces
+﻿namespace SigmaHomework_8_Task1.Services.Interfaces
 {
     public interface IFileHandler
     {

@@ -8,9 +8,9 @@ namespace SigmaHomework_8_Task1.Models
 {
     public class StorageModel
     {
-        public Dictionary<string, int> StorageItems { get; }
+        public Dictionary<string, uint> StorageItems { get; }
         
-        public StorageModel(Dictionary<string, int> storageItems)
+        public StorageModel(Dictionary<string, uint> storageItems)
         {
             StorageItems = storageItems;
         }

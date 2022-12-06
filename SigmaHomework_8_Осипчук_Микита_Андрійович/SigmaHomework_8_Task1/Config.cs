@@ -8,7 +8,7 @@ namespace SigmaHomework_8_Task1
 {
     internal static class Config
     {
-        public static string OrderFileName { get; set; } = "order.txt";
+        public static string OrderFileName { get; set; } = "orders.txt";
 
         public static string SubstitutionsFileName { get; set; } = "substitutions.txt";
 

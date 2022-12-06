@@ -1,5 +1,4 @@
-﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
-using SigmaHomework_8_Task1.Models;
+﻿using SigmaHomework_8_Task1.Models;
 using SigmaHomework_8_Task1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,15 +11,15 @@ namespace SigmaHomework_8_Task1.Services
     internal class UnsatisfiedOrderItemService
     {
         private readonly ISubstitutionsService _substitutionsService;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileHandler _resultFileHandler;
         private readonly IStorageService _storageService;
 
         private SubstitutionsModel _substitutionsModel;
 
-        public UnsatisfiedOrderItemService(ISubstitutionsService substitutionsService, IFileHandler fileHandler, IStorageService storageService)
+        public UnsatisfiedOrderItemService(ISubstitutionsService substitutionsService, IFileHandler resultFileHandler, IStorageService storageService)
         {
             _substitutionsService = substitutionsService;
-            _fileHandler = fileHandler;
+            _resultFileHandler = resultFileHandler;
             _substitutionsModel = _substitutionsService.GetSubstitutions();
             _storageService = storageService;
         }
@@ -32,20 +31,26 @@ namespace SigmaHomework_8_Task1.Services
             sb.AppendLine($"Заказано {unsatisfiedOrderItem.Amount} шт. Не вистачає {unsatisfiedOrderItem.UnsatisfiedAmount}");
             sb.AppendLine($"Можливо замінити на:");
 
+            var localStorage = _storageService.GetCashedStorage();
+
             if (_substitutionsModel.SubstitutionsDictionary
                     .TryGetValue(unsatisfiedOrderItem.ProductName,
                         out string[]? substitutions) && 
                 substitutions != null && substitutions.Length > 0)
-            { 
-                var localStorage = _storageService.GetStorage();
+            {
+                uint toSatisfy = unsatisfiedOrderItem.UnsatisfiedAmount;
+
                 for (int i = 0; i < substitutions.Length; i++)
                 {
                     if (localStorage.StorageItems
                             .TryGetValue(substitutions[i],
-                                out int amountAtStorage) &&
-                        amountAtStorage > unsatisfiedOrderItem.UnsatisfiedAmount)
+                                out uint amountAtStorage)
+                       )
                     {
-                        sb.AppendLine($" - {substitutions[i]}: {unsatisfiedOrderItem.UnsatisfiedAmount} шт.");
+                        if(amountAtStorage > toSatisfy)
+                        {
+                            sb.AppendLine($" - {substitutions[i]}: {unsatisfiedOrderItem.UnsatisfiedAmount} шт.");
+                        }
                     }
                 }
             }
@@ -54,7 +59,7 @@ namespace SigmaHomework_8_Task1.Services
                 sb.AppendLine("Замін для цього продукту немає");
             }
 
-            _fileHandler.Write(sb.ToString());
+            _resultFileHandler.WriteOverride(sb.ToString());
         }
 
         public void UpdateSubstitutions()

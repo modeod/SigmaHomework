@@ -10,19 +10,31 @@ namespace SigmaHomework_8_Task1.Services
 {
     public class StorageService : IStorageService
     {
+        private StorageModel? cashedStorageModel;
 
-        public StorageModel GetStorage()
+        public StorageModel GetCashedStorage()
         {
             // Logic for getting storage. For example HTTP request to storage WepApi or using RabbitMQ
             // For now just simulating it as Microservice
             // 
-            return new StorageModel(new Dictionary<string, int>()
+
+            if (cashedStorageModel == null)
             {
-                {"Donuts", 20 },
-                {"Frozen developers", 2 },
-                {"Tea bags", 255 },
-                {"Coffee", 8 }
-            });
+                cashedStorageModel = GetStorage();
+            }
+
+            return cashedStorageModel;
+        }
+
+        public StorageModel GetStorage()
+        {
+            return new StorageModel(new Dictionary<string, uint>()
+                {
+                    {"Donuts", 200 },
+                    {"Frozen developers", 2 },
+                    {"Tea bags", 255 },
+                    {"Coffee", 1024 }
+                });
         }
     }
 }

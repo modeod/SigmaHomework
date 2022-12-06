@@ -1,6 +1,5 @@
-﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
+﻿using SigmaHomework_8_Task1.Services.Interfaces;
 using SigmaHomework_8_Task1.Models;
-using SigmaHomework_8_Task1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +16,15 @@ namespace SigmaHomework_8_Task1.Services
 
         private readonly IParserOrder _parser;
         private readonly IFileHandler _fileHandler;
-        private readonly ISubstitutionsService _substitutionsService;
         private readonly IStorageService _storageService;
 
         public OrderService(
             IParserOrder parser,
             IFileHandler fileHandler,
-            ISubstitutionsService substitutionsService,
             IStorageService storageService)
         {
             _parser = parser;
             _fileHandler = fileHandler;
-            _substitutionsService = substitutionsService;
             _storageService = storageService;
         }
 
@@ -41,7 +37,7 @@ namespace SigmaHomework_8_Task1.Services
         public void AnalyzeOrders()
         {
             var orders = this.GetOrders();
-            var localStorage = _storageService.GetStorage();
+            var localStorage = _storageService.GetCashedStorage();
 
             for (int i = 0; i < orders.Length; i++)
             {
@@ -51,13 +47,14 @@ namespace SigmaHomework_8_Task1.Services
                 foreach (KeyValuePair<OrderItemModel, uint> orderItem in currOrder.Items)
                 {
                     // Получаем количество продукта из заказа по имени СО СКЛАДА
-                    if (localStorage.StorageItems.TryGetValue(orderItem.Key.Name, out int productAmountInStorage))
+                    if (localStorage.StorageItems.TryGetValue(orderItem.Key.Name, out uint productAmountInStorage))
                     {
                         // если тру - значит товар есть. Проверим количество
-                        if (productAmountInStorage - orderItem.Value >= 0)
+                        if (productAmountInStorage - (int)orderItem.Value >= 0)
                         {
                             // если тру - значит количество на складе удовлетворяет заказу. 
                             // Тут могла быть бизнес логика, если с заказом все хорошо
+                            localStorage.StorageItems[orderItem.Key.Name] -= orderItem.Value;
                             continue;
                         }
                     }

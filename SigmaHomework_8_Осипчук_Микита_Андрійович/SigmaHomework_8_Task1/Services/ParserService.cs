@@ -1,6 +1,5 @@
-﻿using SigmaHomework_8_ConsoleClient.Services.Interfaces;
+﻿using SigmaHomework_8_Task1.Services.Interfaces;
 using SigmaHomework_8_Task1.Models;
-using SigmaHomework_8_Task1.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SigmaHomework_8_ConsoleClient.Services
+namespace SigmaHomework_8_Task1.Services
 {
     public class ParserService : IParserOrder, IParserSubstitutions
     {
@@ -43,7 +42,10 @@ namespace SigmaHomework_8_ConsoleClient.Services
                 string[] substitutionsInfoData = documentByLines[i].Split('-', StringSplitOptions.RemoveEmptyEntries);
                 string[] productSubstitutions = substitutionsInfoData[1].Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-                substitutions.SubstitutionsDictionary.Add(substitutionsInfoData[0], productSubstitutions);
+                substitutions.SubstitutionsDictionary.Add(
+                    substitutionsInfoData[0].Trim(),
+                    productSubstitutions
+                        .Select(p => p.Trim()).ToArray());
             }
 
             return substitutions;

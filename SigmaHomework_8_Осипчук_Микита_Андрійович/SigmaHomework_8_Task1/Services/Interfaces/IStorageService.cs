@@ -4,6 +4,7 @@ namespace SigmaHomework_8_Task1.Services.Interfaces
 {
     public interface IStorageService
     {
+        StorageModel GetCashedStorage();
         StorageModel GetStorage();
     }
 }
