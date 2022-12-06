@@ -14,10 +14,7 @@ namespace SigmaHomework_8_Task1.Services
 
         public StorageModel GetCashedStorage()
         {
-            // Logic for getting storage. For example HTTP request to storage WepApi or using RabbitMQ
-            // For now just simulating it as Microservice
-            // 
-
+            
             if (cashedStorageModel == null)
             {
                 cashedStorageModel = GetStorage();
@@ -28,11 +25,15 @@ namespace SigmaHomework_8_Task1.Services
 
         public StorageModel GetStorage()
         {
+            // Logic for getting storage. For example HTTP request to storage WepApi or using RabbitMQ
+            // For now just simulating it as Microservice
+            // 
+
             return new StorageModel(new Dictionary<string, uint>()
                 {
                     {"Donuts", 200 },
                     {"Frozen developers", 2 },
-                    {"Tea bags", 255 },
+                    {"Tea bags", 265 },
                     {"Coffee", 1024 }
                 });
         }

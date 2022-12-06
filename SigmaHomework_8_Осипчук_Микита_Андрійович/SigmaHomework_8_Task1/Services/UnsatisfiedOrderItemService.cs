@@ -49,7 +49,7 @@ namespace SigmaHomework_8_Task1.Services
                     {
                         if(amountAtStorage > toSatisfy)
                         {
-                            sb.AppendLine($" - {substitutions[i]}: {unsatisfiedOrderItem.UnsatisfiedAmount} шт.");
+                            sb.AppendLine($" - {substitutions[i]}: {toSatisfy} шт.");
                         }
                     }
                 }
