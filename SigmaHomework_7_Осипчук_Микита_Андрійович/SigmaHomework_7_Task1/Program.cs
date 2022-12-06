@@ -46,7 +46,8 @@ namespace SigmaHomework_7_Task1
             storageClient.Print();
 
             Console.WriteLine(new String('-', 10));
-
+// Мало бути 3 результати. 
+            
             var result1 = storage.GetProductsFirstStorageHaveAndSecondDont(storage2);
             var result2 = storage.GetProductsInnerJoin(storage2);
 
