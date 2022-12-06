@@ -11,7 +11,7 @@ namespace SigmaHomework_7_Task2.Validators
     {//не бачу потреби у окремих класах. Занадто дробити теж не добре.
         private readonly ILuhnAlgorithm _luhnAlgorithm;
         private const CardBrand _cardBrand = CardBrand.AmericanExpress;
-
+// вважаю, що краще  валідувати стрічку.
         public ValidatorAmericanExpress(ILuhnAlgorithm luhnAlgorithm)
         {
             _luhnAlgorithm = luhnAlgorithm;
