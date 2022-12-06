@@ -15,7 +15,7 @@ namespace SigmaHomework_8_Task1.Services
         {
             // Logic for getting storage. For example HTTP request to storage WepApi or using RabbitMQ
             // For now just simulating it as Microservice
-
+            // 
             return new StorageModel(new Dictionary<string, int>()
             {
                 {"Donuts", 20 },
