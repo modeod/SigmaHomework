@@ -8,7 +8,7 @@ using SigmaHomework_7_Task2.Luhn;
 namespace SigmaHomework_7_Task2.Validators
 {
     public class ValidatorAmericanExpress : IValidator
-    {
+    {//не бачу потреби у окремих класах. Занадто дробити теж не добре.
         private readonly ILuhnAlgorithm _luhnAlgorithm;
         private const CardBrand _cardBrand = CardBrand.AmericanExpress;
 
