@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaHomework_9_Task1", "SigmaHomework_9_Task1\SigmaHomework_9_Task1.csproj", "{795CE64F-0F3F-4D7F-94AF-E4D1AE6F1137}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SigmaHomework_9_Task2", "SigmaHomework_9_Task2\SigmaHomework_9_Task2.csproj", "{FC6AF27F-09A4-44D0-A2B4-BBE05CC344D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
