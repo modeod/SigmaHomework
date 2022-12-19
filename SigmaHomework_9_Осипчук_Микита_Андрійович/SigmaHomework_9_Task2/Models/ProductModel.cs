@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SigmaHomework_9_Task2.Models
 {
-    internal class ProductModel : IEquatable<ProductModel?>, IComparable<ProductModel>
+    public class ProductModel : IEquatable<ProductModel?>, IComparable<ProductModel>
     {
         public string Name { get; set; }
         public decimal Price { get; set; }

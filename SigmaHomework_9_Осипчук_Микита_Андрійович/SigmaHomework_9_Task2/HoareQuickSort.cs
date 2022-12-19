@@ -8,7 +8,7 @@ namespace SigmaHomework_9_Task2
 {
     public delegate T GetPivotLogic<T>(T[] arr, int left, int right) where T : IComparable<T>;
 
-    public class HoareQuickSort<T>  where T : IComparable<T>
+    public class HoareQuickSort<T> where T : IComparable<T>
     {
         public int PartOfSortHoara(T[] arr, int left, int right, GetPivotLogic<T> pivotLogic)
         {

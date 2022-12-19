@@ -1,4 +1,5 @@
-﻿using Bogus;
+﻿using BenchmarkDotNet.Running;
+using Bogus;
 using SigmaHomework_9_Task2.Models;
 using System.Text;
 
@@ -34,6 +35,11 @@ namespace SigmaHomework_9_Task2
             Console.WriteLine("\n ========= RESULT: ");
             hoareQuickSort.QuickSortHoara(products1, lastPivot);
             Console.WriteLine(String.Join<ProductModel>('\n', products1));
+
+            Console.ReadKey();
+            //BenchmarkRunner.Run<BenchmarkHoare>();
+            HandmadeHoaraBenchmarkFU benchmark = new();
+            benchmark.BenchmarkHoara(new GetPivotLogic<ProductModel>[] {firstPivot, middlePivot});
 
             Console.ReadKey();
         }
